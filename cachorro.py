@@ -17,7 +17,6 @@ y = 360
 # Velocidade de movimento
 VELOCIDADE = 5
 
-
 def mover(teclas, largura_tela, altura_tela):
     global x, y
 
@@ -51,7 +50,6 @@ def mover(teclas, largura_tela, altura_tela):
         x = novo_x
         y = novo_y
 
-
 def colidiu_com_mesa(novo_x, novo_y):
     metade = TAMANHO // 2
 
@@ -77,7 +75,6 @@ def colidiu_com_mesa(novo_x, novo_y):
             return True
 
     return False
-
 
 def desenhar_cachorro(superficie):
     xc = int(x)

@@ -18,7 +18,6 @@ MESAS = [
 # Superfície pré-renderizada do cenário
 cenario_surface = None
 
-
 def desenhar_mesa(superficie, x, y):
     pontos = [
         (x, y),
@@ -30,7 +29,6 @@ def desenhar_mesa(superficie, x, y):
     scanline_fill(superficie, pontos, CINZA)
     desenhar_poligono(superficie, pontos, PRETO)
 
-
 def criar_cenario(largura, altura):
     global cenario_surface
 
@@ -39,7 +37,6 @@ def criar_cenario(largura, altura):
 
     for (x, y) in MESAS:
         desenhar_mesa(cenario_surface, x, y)
-
 
 def desenhar_cenario(tela):
     tela.blit(cenario_surface, (0, 0))

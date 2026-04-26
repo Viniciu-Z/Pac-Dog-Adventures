@@ -15,7 +15,6 @@ y = 0
 angulo = 0
 tempo = 0
 
-
 def gerar_alimento(largura_tela, altura_tela):
     global x, y
 
@@ -28,7 +27,6 @@ def gerar_alimento(largura_tela, altura_tela):
             y = novo_y
             break
 
-
 def dentro_da_mesa(px, py):
     for (mx, my) in MESAS:
         if (
@@ -37,7 +35,6 @@ def dentro_da_mesa(px, py):
         ):
             return True
     return False
-
 
 def perto_do_cachorro(px, py):
     metade = cachorro.TAMANHO // 2
@@ -51,7 +48,6 @@ def perto_do_cachorro(px, py):
         return True
 
     return False
-
 
 def desenhar_alimento(superficie):
     global angulo, tempo
@@ -77,7 +73,6 @@ def desenhar_alimento(superficie):
     # Desenho
     scanline_fill(superficie, pontos_transformados, VERMELHO)
     desenhar_poligono(superficie, pontos_transformados, (0, 0, 0))
-
 
 def colidiu_com_jogador():
     metade_dog = cachorro.TAMANHO // 2

@@ -4,18 +4,16 @@ import cachorro
 import alimento
 from cenario import MESAS, LARGURA_MESA, ALTURA_MESA
 
-# 🎨 cores
+#cores
 BRANCO = (255, 255, 255)
 VERDE = (0, 150, 0)
 VERMELHO = (200, 0, 0)
 CINZA = (100, 100, 100)
 
-# 📦 viewport (posição na tela)
+#viewport (posição na tela)
 VIEWPORT = (80, 520, 260, 640)
 
-# =====================================================
-# 🐶 DESENHAR CACHORRO NO MINIMAPA
-# =====================================================
+# Cachorro no Minimapa
 def desenhar_cachorro_minimap(tela, m):
     metade = cachorro.TAMANHO // 2
 
@@ -30,10 +28,7 @@ def desenhar_cachorro_minimap(tela, m):
     scanline_fill(tela, pontos, VERDE)
     desenhar_poligono(tela, pontos, BRANCO)
 
-
-# =====================================================
-# 🍖 DESENHAR ALIMENTO NO MINIMAPA
-# =====================================================
+# Alimento no Minimapa
 def desenhar_alimento_minimap(tela, m):
     r = alimento.TAMANHO_ALIMENTO // 2
 
@@ -47,10 +42,7 @@ def desenhar_alimento_minimap(tela, m):
     pontos = aplica_transformacao(m, pontos)
     scanline_fill(tela, pontos, VERMELHO)
 
-
-# =====================================================
-# 🪑 DESENHAR MESAS NO MINIMAPA
-# =====================================================
+# Mesas no Minimapa
 def desenhar_mesas_minimap(tela, m):
     for (mx, my) in MESAS:
         pontos = [
@@ -63,10 +55,6 @@ def desenhar_mesas_minimap(tela, m):
         pontos = aplica_transformacao(m, pontos)
         scanline_fill(tela, pontos, CINZA)
 
-
-# =====================================================
-# 🗺️ DESENHAR MINIMAPA
-# =====================================================
 def desenhar_minimapa(tela, largura, altura):
     janela_mundo = (0, 0, largura, altura)
 

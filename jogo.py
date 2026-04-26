@@ -2,6 +2,7 @@ import pygame
 import sys
 import viewport
 
+from telas import tela_abertura, tela_game_over
 from cenario import criar_cenario, desenhar_cenario
 from cachorro import desenhar_cachorro, mover
 from temporizador import desenhar as desenhar_tempo, atualizar
@@ -18,59 +19,68 @@ pygame.display.set_caption("Pac Dog")
 
 relogio = pygame.time.Clock()
 
-# Inicializa sistemas
-pontuacao.iniciar()
+while True:
 
-# Cria cenário
-criar_cenario(largura, altura)
+    # Tela inicial
+    tela_abertura(tela, largura, altura)
 
-# Gera primeiro alimento
-gerar_alimento(largura, altura)
+    # Inicializa sistemas
+    pontuacao.resetar()
+    pontuacao.iniciar()
 
-# Controle de tempo
-tempo_inicial = 50
-tempo_restante = tempo_inicial
-tempo_anterior = pygame.time.get_ticks()
-acabou = False
+    # Cria cenário
+    criar_cenario(largura, altura)
 
-rodando = True
-while rodando:
-    relogio.tick(60)
+    # Gera alimento
+    gerar_alimento(largura, altura)
 
-    # Eventos
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
+    # Tempo
+    tempo_inicial = 50
+    tempo_restante = tempo_inicial
+    tempo_anterior = pygame.time.get_ticks()
+    acabou = False
+
+    rodando = True
+
+    while rodando:
+        relogio.tick(60)
+
+        # Eventos
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        # Movimento
+        teclas = pygame.key.get_pressed()
+        mover(teclas, largura, altura)
+
+        # Colisão
+        if colidiu_com_jogador():
+            pontuacao.adicionar_ponto()
+            gerar_alimento(largura, altura)
+
+        # Tempo
+        tempo_anterior, tempo_restante, acabou = atualizar(
+            tempo_anterior, tempo_restante, acabou
+        )
+
+        # Se acabou → vai pra tela de game over
+        if acabou:
+            pontos = pontuacao.pontos
+            tela_game_over(tela, largura, altura, pontos)
             rodando = False
+            break
 
-    # Entrada e movimento
-    teclas = pygame.key.get_pressed()
-    mover(teclas, largura, altura)
+        # Render
+        tela.fill(PRETO)
 
-    # Colisão com alimento
-    if colidiu_com_jogador():
-        pontuacao.adicionar_ponto()
-        gerar_alimento(largura, altura)
+        desenhar_cenario(tela)
+        desenhar_alimento(tela)
+        desenhar_cachorro(tela)
 
-    # Atualização do tempo
-    tempo_anterior, tempo_restante, acabou = atualizar(
-        tempo_anterior, tempo_restante, acabou
-    )
+        pontuacao.desenhar(tela)
+        desenhar_tempo(tela, tempo_restante)
+        viewport.desenhar_minimapa(tela, largura, altura)
 
-    if acabou:
-        rodando = False
-
-    # Renderização
-    tela.fill(PRETO)
-
-    desenhar_cenario(tela)
-    desenhar_alimento(tela)
-    desenhar_cachorro(tela)
-
-    pontuacao.desenhar(tela)
-    desenhar_tempo(tela, tempo_restante)
-    viewport.desenhar_minimapa(tela, largura, altura)
-
-    pygame.display.flip()
-
-pygame.quit()
-sys.exit()
+        pygame.display.flip()
