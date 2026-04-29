@@ -26,8 +26,10 @@ def desenhar_mesa(superficie, x, y):
         (x, y + ALTURA_MESA)
     ]
 
+    janela = (0, 0, superficie.get_width(), superficie.get_height())
+
     scanline_fill(superficie, pontos, CINZA)
-    desenhar_poligono(superficie, pontos, PRETO)
+    desenhar_poligono_recortado(superficie, pontos, janela, PRETO)
 
 def criar_cenario(largura, altura):
     global cenario_surface

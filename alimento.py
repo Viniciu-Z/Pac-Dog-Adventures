@@ -71,8 +71,10 @@ def desenhar_alimento(superficie):
     pontos_transformados = aplica_transformacao(m, pontos)
 
     # Desenho
+    janela = (0, 0, superficie.get_width(), superficie.get_height())
+
     scanline_fill(superficie, pontos_transformados, VERMELHO)
-    desenhar_poligono(superficie, pontos_transformados, (0, 0, 0))
+    desenhar_poligono_recortado(superficie, pontos_transformados, janela, (0, 0, 0))
 
 def colidiu_com_jogador():
     metade_dog = cachorro.TAMANHO // 2
