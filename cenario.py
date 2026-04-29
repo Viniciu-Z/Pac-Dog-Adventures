@@ -31,11 +31,34 @@ def desenhar_mesa(superficie, x, y):
     scanline_fill(superficie, pontos, CINZA)
     desenhar_poligono_recortado(superficie, pontos, janela, PRETO)
 
+def desenhar_fundo_textura(superficie, textura):
+    largura, altura = superficie.get_width(), superficie.get_height()
+
+    pontos = [
+        (0, 0),
+        (largura, 0),
+        (largura, altura),
+        (0, altura)
+    ]
+
+    # UV mapeando a imagem inteira
+    uvs = [
+        (0, 0),
+        (1, 0),
+        (1, 1),
+        (0, 1)
+    ]
+
+    scanline_texture(superficie, pontos, uvs, textura)
+
 def criar_cenario(largura, altura):
     global cenario_surface
 
     cenario_surface = pygame.Surface((largura, altura)).convert()
-    cenario_surface.fill(BRANCO)
+
+    textura = pygame.image.load("texturas/chao_textura.jpg").convert()
+
+    desenhar_fundo_textura(cenario_surface, textura)
 
     for (x, y) in MESAS:
         desenhar_mesa(cenario_surface, x, y)
