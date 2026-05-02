@@ -26,9 +26,20 @@ def desenhar_mesa(superficie, x, y):
         (x, y + ALTURA_MESA)
     ]
 
+    # 🎨 cores por vértice (gradiente)
+    cores = [
+        (220, 220, 220),  # topo esq
+        (220, 220, 220),  # topo dir
+        (60, 60, 60),  # base dir
+        (60, 60, 60)  # base esq
+    ]
+
     janela = (0, 0, superficie.get_width(), superficie.get_height())
 
-    scanline_fill(superficie, pontos, CINZA)
+    # 🔥 usa gradiente em vez de cor sólida
+    scanline_fill_gradiente(superficie, pontos, cores)
+
+    # borda continua normal
     desenhar_poligono_recortado(superficie, pontos, janela, PRETO)
 
 def desenhar_fundo_textura(superficie, textura):
