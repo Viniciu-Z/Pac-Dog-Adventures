@@ -44,6 +44,9 @@ Responsável pela implementação do minimapa. Realiza a transformação de coor
 ### 9 - telas.py
 Contém as telas do jogo, como a tela inicial e a tela de game over. Gerencia a interface visual dessas etapas e a interação básica do usuário (iniciar ou reiniciar o jogo).
 
+## Link Repositório:
+https://github.com/Viniciu-Z/Pac-Dog-Adventures.git
+
 ## Como Executar
 Este projeto foi desenvolvido utilizando a linguagem Python com a biblioteca Pygame, sendo implementado e testado no ambiente de desenvolvimento PyCharm.
 Antes de executar o projeto, é necessário ter instalado:
