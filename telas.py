@@ -2,13 +2,12 @@ import pygame
 import sys
 from funcoes import *
 
-# 🎨 cores
+# cores
 PRETO = (0, 0, 0)
 BRANCO = (255, 255, 255)
 AZUL = (20, 40, 120)
 VERMELHO = (180, 0, 0)
 
-# Imagem oara Textura
 textura_fundo = pygame.image.load("texturas/Doguinho.jpeg")
 
 def desenhar_texto(tela, texto, x, y, tamanho=36):
@@ -224,7 +223,6 @@ def tela_game_over(tela, largura, altura, pontos):
 
         flood_fill_iterativo(tela, bx + 5, by + 5, VERMELHO, BRANCO)
 
-        # Recomeçar
         texto_restart = "APERTE R PARA RECOMECAR"
 
         surf_restart = fonte_texto.render(texto_restart,True, BRANCO)

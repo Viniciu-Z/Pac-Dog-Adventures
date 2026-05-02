@@ -5,28 +5,28 @@ PRETO = (0, 0, 0)
 BRANCO = (255, 255, 255)
 CINZA = (150, 150, 150)
 
-LARGURA_MESA = 400
-ALTURA_MESA = 235
+largura_mesa = 400
+altura_mesa = 235
 
-MESAS = [
+mesas = [
     (70, 70),
     (600, 70),
     (70, 410),
     (600, 410)
 ]
 
-# Superfície pré-renderizada do cenário
+# Superfície pre-renderizada do cenario
 cenario_surface = None
 
 def desenhar_mesa(superficie, x, y):
     pontos = [
         (x, y),
-        (x + LARGURA_MESA, y),
-        (x + LARGURA_MESA, y + ALTURA_MESA),
-        (x, y + ALTURA_MESA)
+        (x + largura_mesa, y),
+        (x + largura_mesa, y + altura_mesa),
+        (x, y + altura_mesa)
     ]
 
-    # 🎨 cores por vértice (gradiente)
+    # cores para o scanline gradiente
     cores = [
         (220, 220, 220),  # topo esq
         (220, 220, 220),  # topo dir
@@ -36,10 +36,9 @@ def desenhar_mesa(superficie, x, y):
 
     janela = (0, 0, superficie.get_width(), superficie.get_height())
 
-    # 🔥 usa gradiente em vez de cor sólida
+    # Pintando com gradiente
     scanline_fill_gradiente(superficie, pontos, cores)
 
-    # borda continua normal
     desenhar_poligono_recortado(superficie, pontos, janela, PRETO)
 
 def desenhar_fundo_textura(superficie, textura):
@@ -52,7 +51,6 @@ def desenhar_fundo_textura(superficie, textura):
         (0, altura)
     ]
 
-    # UV mapeando a imagem inteira
     uvs = [
         (0, 0),
         (1, 0),
@@ -71,7 +69,7 @@ def criar_cenario(largura, altura):
 
     desenhar_fundo_textura(cenario_surface, textura)
 
-    for (x, y) in MESAS:
+    for (x, y) in mesas:
         desenhar_mesa(cenario_surface, x, y)
 
 def desenhar_cenario(tela):

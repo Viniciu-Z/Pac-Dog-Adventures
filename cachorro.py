@@ -1,21 +1,19 @@
 from funcoes import desenhar_poligono, scanline_fill, gerar_elipse
-from cenario import MESAS, LARGURA_MESA, ALTURA_MESA
+from cenario import mesas, largura_mesa, altura_mesa
 import pygame
 
-# Cores
 MARROM = (139, 69, 19)
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
 
-# Tamanho do cachorro
-TAMANHO = 40
+tamanho = 40
 
-# Posição inicial (centro da tela)
+# Posição inicial no centro da tela
 x = 540
 y = 360
 
 # Velocidade de movimento
-VELOCIDADE = 5
+velocidade = 5
 
 def mover(teclas, largura_tela, altura_tela):
     global x, y
@@ -25,15 +23,15 @@ def mover(teclas, largura_tela, altura_tela):
 
     # Entrada do jogador
     if teclas[pygame.K_w] or teclas[pygame.K_UP]:
-        novo_y -= VELOCIDADE
+        novo_y -= velocidade
     if teclas[pygame.K_s] or teclas[pygame.K_DOWN]:
-        novo_y += VELOCIDADE
+        novo_y += velocidade
     if teclas[pygame.K_a] or teclas[pygame.K_LEFT]:
-        novo_x -= VELOCIDADE
+        novo_x -= velocidade
     if teclas[pygame.K_d] or teclas[pygame.K_RIGHT]:
-        novo_x += VELOCIDADE
+        novo_x += velocidade
 
-    metade = TAMANHO // 2
+    metade = tamanho // 2
 
     # Limite da tela
     if novo_x - metade < 0:
@@ -45,13 +43,12 @@ def mover(teclas, largura_tela, altura_tela):
     if novo_y + metade > altura_tela:
         novo_y = altura_tela - metade
 
-    # Atualiza posição se não colidir com mesa
     if not colidiu_com_mesa(novo_x, novo_y):
         x = novo_x
         y = novo_y
 
 def colidiu_com_mesa(novo_x, novo_y):
-    metade = TAMANHO // 2
+    metade = tamanho // 2
 
     # Limites do cachorro
     cachorro_esq = novo_x - metade
@@ -59,11 +56,11 @@ def colidiu_com_mesa(novo_x, novo_y):
     cachorro_top = novo_y - metade
     cachorro_bot = novo_y + metade
 
-    for (mx, my) in MESAS:
+    for (mx, my) in mesas:
         mesa_esq = mx
-        mesa_dir = mx + LARGURA_MESA
+        mesa_dir = mx + largura_mesa
         mesa_top = my
-        mesa_bot = my + ALTURA_MESA
+        mesa_bot = my + altura_mesa
 
         # Teste de colisão AABB
         if (

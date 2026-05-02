@@ -2,20 +2,20 @@ import pygame
 from funcoes import *
 import cachorro
 import alimento
-from cenario import MESAS, LARGURA_MESA, ALTURA_MESA
+from cenario import mesas, largura_mesa, altura_mesa
 
-#cores
+# cores
 BRANCO = (255, 255, 255)
 VERDE = (0, 150, 0)
 VERMELHO = (200, 0, 0)
 CINZA = (100, 100, 100)
 
-#viewport (posição na tela)
-VIEWPORT = (80, 520, 260, 640)
+# viewport (posição na tela)
+viewport = (80, 520, 260, 640)
 
 # Cachorro no Minimapa
 def desenhar_cachorro_minimap(tela, m):
-    metade = cachorro.TAMANHO // 2
+    metade = cachorro.tamanho // 2
 
     pontos = [
         (cachorro.x - metade, cachorro.y - metade),
@@ -30,7 +30,7 @@ def desenhar_cachorro_minimap(tela, m):
 
 # Alimento no Minimapa
 def desenhar_alimento_minimap(tela, m):
-    r = alimento.TAMANHO_ALIMENTO // 2
+    r = alimento.tamanho_alimento // 2
 
     pontos = [
         (alimento.x - r, alimento.y - r),
@@ -44,32 +44,39 @@ def desenhar_alimento_minimap(tela, m):
 
 # Mesas no Minimapa
 def desenhar_mesas_minimap(tela, m):
-    for (mx, my) in MESAS:
+    for (mx, my) in mesas:
         pontos = [
             (mx, my),
-            (mx + LARGURA_MESA, my),
-            (mx + LARGURA_MESA, my + ALTURA_MESA),
-            (mx, my + ALTURA_MESA)
+            (mx + largura_mesa, my),
+            (mx + largura_mesa, my + altura_mesa),
+            (mx, my + altura_mesa)
         ]
 
         pontos = aplica_transformacao(m, pontos)
         scanline_fill(tela, pontos, CINZA)
 
+def desenhar_borda_viewport(tela):
+    x, y, x2, y2 = viewport
+
+    pontos = [
+        (x, y),
+        (x2, y),
+        (x2, y2),
+        (x, y2)
+    ]
+
+    # desenha apenas a borda (sem fill)
+    desenhar_poligono(tela, pontos, BRANCO)
+
 def desenhar_minimapa(tela, largura, altura):
     janela_mundo = (0, 0, largura, altura)
 
-    m = janela_viewport(janela_mundo, VIEWPORT)
+    m = janela_viewport(janela_mundo, viewport)
 
     # desenha elementos
     desenhar_mesas_minimap(tela, m)
     desenhar_alimento_minimap(tela, m)
     desenhar_cachorro_minimap(tela, m)
 
-    # borda do minimapa
-    x, y, x2, y2 = VIEWPORT
-    pygame.draw.rect(
-        tela,
-        BRANCO,
-        pygame.Rect(x, y, x2 - x, y2 - y),
-        1
-    )
+    # borda do minimapa (sem pygame.draw)
+    desenhar_borda_viewport(tela)

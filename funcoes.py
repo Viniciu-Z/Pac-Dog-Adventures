@@ -324,7 +324,6 @@ def scanline_texture(superficie, pontos, uvs, textura):
                     cor = textura.get_at((tx, ty))
                     setPixel(superficie, x, y, cor)
 
-
 def interpola_cor(c1, c2, t):
     r = int(c1[0] + (c2[0] - c1[0]) * t)
     g = int(c1[1] + (c2[1] - c1[1]) * t)
@@ -336,10 +335,6 @@ def interpola_cor(c1, c2, t):
 
     return (r, g, b)
 
-
-# =========================
-# Scanline Fill
-# =========================
 def scanline_fill_gradiente(superficie, pontos, cores):
     ys = [p[1] for p in pontos]
     y_min = int(min(ys))

@@ -1,11 +1,11 @@
 import random
 import math
 from funcoes import *
-from cenario import MESAS, LARGURA_MESA, ALTURA_MESA
+from cenario import mesas, largura_mesa, altura_mesa
 import cachorro
 
 VERMELHO = (255, 0, 0)
-TAMANHO_ALIMENTO = 20
+tamanho_alimento = 20
 
 # Posição
 x = 0
@@ -19,8 +19,8 @@ def gerar_alimento(largura_tela, altura_tela):
     global x, y
 
     while True:
-        novo_x = random.randint(TAMANHO_ALIMENTO, largura_tela - TAMANHO_ALIMENTO)
-        novo_y = random.randint(TAMANHO_ALIMENTO, altura_tela - TAMANHO_ALIMENTO)
+        novo_x = random.randint(tamanho_alimento, largura_tela - tamanho_alimento)
+        novo_y = random.randint(tamanho_alimento, altura_tela - tamanho_alimento)
 
         if not dentro_da_mesa(novo_x, novo_y) and not perto_do_cachorro(novo_x, novo_y):
             x = novo_x
@@ -28,16 +28,16 @@ def gerar_alimento(largura_tela, altura_tela):
             break
 
 def dentro_da_mesa(px, py):
-    for (mx, my) in MESAS:
+    for (mx, my) in mesas:
         if (
-            px > mx and px < mx + LARGURA_MESA and
-            py > my and py < my + ALTURA_MESA
+            px > mx and px < mx + largura_mesa and
+            py > my and py < my + altura_mesa
         ):
             return True
     return False
 
 def perto_do_cachorro(px, py):
-    metade = cachorro.TAMANHO // 2
+    metade = cachorro.tamanho // 2
 
     if (
         px > cachorro.x - metade and
@@ -59,9 +59,9 @@ def desenhar_alimento(superficie):
     escala_anim = 1.0 + 0.3 * math.sin(tempo)
 
     # Elipse centrada na origem
-    pontos = gerar_elipse(0, 0, TAMANHO_ALIMENTO // 2, TAMANHO_ALIMENTO // 2, passos=50)
+    pontos = gerar_elipse(0, 0, tamanho_alimento // 2, tamanho_alimento // 2, passos=50)
 
-    # Transformações: rotação, escala e translação
+    # Transformações
     m = cria_transformacao()
     m = multiplica_matrizes(translacao(0, 0), m)
     m = multiplica_matrizes(rotacao(angulo), m)
@@ -77,8 +77,8 @@ def desenhar_alimento(superficie):
     desenhar_poligono_recortado(superficie, pontos_transformados, janela, (0, 0, 0))
 
 def colidiu_com_jogador():
-    metade_dog = cachorro.TAMANHO // 2
-    metade_food = TAMANHO_ALIMENTO // 2
+    metade_dog = cachorro.tamanho // 2
+    metade_food = tamanho_alimento // 2
 
     dog_x = cachorro.x
     dog_y = cachorro.y

@@ -24,11 +24,11 @@ while True:
     # Tela inicial
     tela_abertura(tela, largura, altura)
 
-    # Inicializa sistemas
+    # Inicializa pontuação
     pontuacao.resetar()
     pontuacao.iniciar()
 
-    # Cria cenário
+    # Cria cenario
     criar_cenario(largura, altura)
 
     # Gera alimento
@@ -45,17 +45,14 @@ while True:
     while rodando:
         relogio.tick(60)
 
-        # Eventos
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-        # Movimento
         teclas = pygame.key.get_pressed()
         mover(teclas, largura, altura)
 
-        # Colisão
         if colidiu_com_jogador():
             pontuacao.adicionar_ponto()
             gerar_alimento(largura, altura)
@@ -65,14 +62,13 @@ while True:
             tempo_anterior, tempo_restante, acabou
         )
 
-        # Se acabou → vai pra tela de game over
+        # Se acabou vai pra tela de game over
         if acabou:
             pontos = pontuacao.pontos
             tela_game_over(tela, largura, altura, pontos)
             rodando = False
             break
 
-        # Render
         tela.fill(PRETO)
 
         desenhar_cenario(tela)

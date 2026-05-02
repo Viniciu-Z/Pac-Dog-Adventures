@@ -2,10 +2,8 @@ import pygame
 
 PRETO = (0, 0, 0)
 
-# Pontuação atual
 pontos = 0
 
-# Fonte (inicializada uma vez)
 fonte = None
 
 def iniciar():
