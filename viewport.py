@@ -4,16 +4,14 @@ import cachorro
 import alimento
 from cenario import mesas, largura_mesa, altura_mesa
 
-# cores
 BRANCO = (255, 255, 255)
 VERDE = (0, 150, 0)
 VERMELHO = (200, 0, 0)
 CINZA = (100, 100, 100)
 
-# viewport (posição na tela)
+# posição na tela
 viewport = (80, 520, 260, 640)
 
-# Cachorro no Minimapa
 def desenhar_cachorro_minimap(tela, m):
     metade = cachorro.tamanho // 2
 
@@ -65,7 +63,7 @@ def desenhar_borda_viewport(tela):
         (x, y2)
     ]
 
-    # desenha apenas a borda (sem fill)
+    # desenha apenas a borda
     desenhar_poligono(tela, pontos, BRANCO)
 
 def desenhar_minimapa(tela, largura, altura):
@@ -73,10 +71,8 @@ def desenhar_minimapa(tela, largura, altura):
 
     m = janela_viewport(janela_mundo, viewport)
 
-    # desenha elementos
     desenhar_mesas_minimap(tela, m)
     desenhar_alimento_minimap(tela, m)
     desenhar_cachorro_minimap(tela, m)
 
-    # borda do minimapa (sem pygame.draw)
     desenhar_borda_viewport(tela)
