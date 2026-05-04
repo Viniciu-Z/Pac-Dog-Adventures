@@ -62,3 +62,12 @@ Abra o terminal na pasta do projeto;
 Execute o comando:
 `python jogo.py`
 
+## Vídeo:
+
+
+https://github.com/user-attachments/assets/70133fd6-6942-48c4-815e-85dda4423153
+
+#### Link Pro Youtube: https://youtu.be/Oyu3tkLGl4s
+
+
+
