@@ -10,11 +10,6 @@ VERMELHO = (180, 0, 0)
 
 textura_fundo = pygame.image.load("texturas/Doguinho.jpeg")
 
-def desenhar_texto(tela, texto, x, y, tamanho=36):
-    fonte = pygame.font.SysFont(None, tamanho)
-    img = fonte.render(texto, True, BRANCO)
-    tela.blit(img, (x, y))
-
 # Função para Textura no fundo
 def desenhar_fundo_textura(tela, largura, altura):
     pontos = [
