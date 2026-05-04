@@ -15,10 +15,12 @@ mesas = [
     (600, 410)
 ]
 
-# Superfície pre-renderizada do cenario
+# Superfície separada do cenario
+# Para desenhar o cenario apenas uma vez e melhorar o desempenho
 cenario_surface = None
 
 def desenhar_mesa(superficie, x, y):
+    # Defini os pontos para desenhar o poligono (retangulo)
     pontos = [
         (x, y),
         (x + largura_mesa, y),
@@ -28,15 +30,14 @@ def desenhar_mesa(superficie, x, y):
 
     # cores para o scanline gradiente
     cores = [
-        (220, 220, 220),  # topo esq
-        (220, 220, 220),  # topo dir
-        (60, 60, 60),  # base dir
-        (60, 60, 60)  # base esq
+        (220, 220, 220),
+        (220, 220, 220),
+        (60, 60, 60),
+        (60, 60, 60)
     ]
 
     janela = (0, 0, superficie.get_width(), superficie.get_height())
 
-    # Pintando com gradiente
     scanline_fill_gradiente(superficie, pontos, cores)
 
     desenhar_poligono_recortado(superficie, pontos, janela, PRETO)
@@ -44,6 +45,7 @@ def desenhar_mesa(superficie, x, y):
 def desenhar_fundo_textura(superficie, textura):
     largura, altura = superficie.get_width(), superficie.get_height()
 
+    # Pontos do poligono que cobre a tela inteira
     pontos = [
         (0, 0),
         (largura, 0),
@@ -51,6 +53,7 @@ def desenhar_fundo_textura(superficie, textura):
         (0, altura)
     ]
 
+    # Coordenadas da textura
     uvs = [
         (0, 0),
         (1, 0),
@@ -73,4 +76,5 @@ def criar_cenario(largura, altura):
         desenhar_mesa(cenario_surface, x, y)
 
 def desenhar_cenario(tela):
+    # "Cola" a imagem na tela
     tela.blit(cenario_surface, (0, 0))

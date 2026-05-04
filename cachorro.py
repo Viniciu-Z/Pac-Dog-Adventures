@@ -22,13 +22,13 @@ def mover(teclas, largura_tela, altura_tela):
     novo_y = y
 
     # Entrada do jogador
-    if teclas[pygame.K_w] or teclas[pygame.K_UP]:
+    if teclas[pygame.K_w]:
         novo_y -= velocidade
-    if teclas[pygame.K_s] or teclas[pygame.K_DOWN]:
+    if teclas[pygame.K_s]:
         novo_y += velocidade
-    if teclas[pygame.K_a] or teclas[pygame.K_LEFT]:
+    if teclas[pygame.K_a]:
         novo_x -= velocidade
-    if teclas[pygame.K_d] or teclas[pygame.K_RIGHT]:
+    if teclas[pygame.K_d]:
         novo_x += velocidade
 
     metade = tamanho // 2

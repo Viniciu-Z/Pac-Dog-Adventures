@@ -54,7 +54,7 @@ def desenhar_poligono(superficie, pontos, cor_borda):
         bresenham(superficie, x0, y0, x1, y1, cor_borda)
 
 def scanline_fill(superficie, pontos, cor):
-    # 🔥 garante inteiros
+    # garante inteiros
     pontos = [(int(x), int(y)) for (x, y) in pontos]
 
     ys = [p[1] for p in pontos]

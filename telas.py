@@ -63,7 +63,7 @@ def tela_abertura(tela, largura, altura):
         surf_outline = fonte_titulo.render(texto, True, PRETO)
 
         titulo_x = largura // 2 - surf_titulo.get_width() // 2
-        titulo_y = altura // 3 - surf_titulo.get_height() // 2
+        titulo_y = altura // 3 - surf_titulo.get_height() // 2 - 180
 
         offsets = [
             (-3, 0), (3, 0),

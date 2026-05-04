@@ -35,7 +35,7 @@ while True:
     gerar_alimento(largura, altura)
 
     # Tempo
-    tempo_inicial = 50
+    tempo_inicial = 30
     tempo_restante = tempo_inicial
     tempo_anterior = pygame.time.get_ticks()
     acabou = False
